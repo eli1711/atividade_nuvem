@@ -1,0 +1,22 @@
+version: '3'
+services:
+  servico_producao:
+    build: ./servico_producao
+    ports:
+      - "5000:5000"
+  servico_qualidade:
+    build: ./servico_qualidade
+    ports:
+      - "5001:5001"
+  servico_pecas:
+    build: ./servico_pecas
+    ports:
+      - "5002:5002"
+  servico_relatorios:
+    build: ./servico_relatorios
+    ports:
+      - "5003:5003"
+  servico_certificacao:
+    build: ./servico_certificacao
+    ports:
+      - "5004:5004"
