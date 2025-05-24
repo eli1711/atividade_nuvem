@@ -62,6 +62,21 @@ services:
     networks:
       - projeto_net
 
+  frontend:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    networks:
+      - projeto_net
+    depends_on:
+      - servico_producao
+      - servico_certificacao
+      - servico_relatorios
+      - servico_qualidade
+      - servico_pecas
+
 networks:
   projeto_net:
     driver: bridge
