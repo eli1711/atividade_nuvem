@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/front/style.css">
+    <link rel="stylesheet" href="front/style.css"> <!-- Ajuste o caminho conforme necessário -->
     <title>Principal</title>
 </head>
 <body>
@@ -14,70 +14,127 @@
 
     <main>
         <!-- Tabela de Peças -->
-        <table class="tabela-dados">
-            <thead>
-                <tr>
-                    <th>ID Peça</th> 
-                    <th>Nome Peça</th>
-                    <th>Descrição</th>
-                    <th>Data Recebimento</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dados serão renderizados aqui -->
-            </tbody>
-        </table>
+        <section>
+            <h2>Tabela de Peças</h2>
+            <table class="tabela-dados" id="tabela-pecas">
+                <thead>
+                    <tr>
+                        <th>ID Peça</th> 
+                        <th>Nome Peça</th>
+                        <th>Descrição</th>
+                        <th>Data Recebimento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dados serão renderizados aqui -->
+                </tbody>
+            </table>
+        </section>
 
         <!-- Tabela de Ordens -->
-        <table class="tabela-dados">
-            <thead>
-                <tr>
-                    <th>ID Ordem</th> 
-                    <th>Descrição</th>
-                    <th>Data Inicio</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dados serão renderizados aqui -->
-            </tbody>
-        </table>
+        <section>
+            <h2>Tabela de Ordens</h2>
+            <table class="tabela-dados" id="tabela-ordens">
+                <thead>
+                    <tr>
+                        <th>ID Ordem</th> 
+                        <th>Descrição</th>
+                        <th>Data Inicio</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dados serão renderizados aqui -->
+                </tbody>
+            </table>
+        </section>
 
         <!-- Tabela de Inspeções -->
-        <table class="tabela-dados">
-            <thead>
-                <tr>
-                    <th>ID Inspeção</th>
-                    <th>ID Ordem</th> 
-                    <th>Problema</th>
-                    <th>Recomendação</th>
-                    <th>Data Inspeção</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dados serão renderizados aqui -->
-            </tbody>
-        </table>
+        <section>
+            <h2>Tabela de Inspeções</h2>
+            <table class="tabela-dados" id="tabela-inspecao">
+                <thead>
+                    <tr>
+                        <th>ID Inspeção</th>
+                        <th>ID Ordem</th> 
+                        <th>Problema</th>
+                        <th>Recomendação</th>
+                        <th>Data Inspeção</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dados serão renderizados aqui -->
+                </tbody>
+            </table>
+        </section>
 
         <!-- Tabela de Relatórios -->
-        <table class="tabela-dados">
-            <thead>
-                <tr>
-                    <th>ID Relatório</th>
-                    <th>Tipo Relatório</th> 
-                    <th>Problema</th>
-                    <th>Conteudo</th>
-                    <th>Data Geração</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dados serão renderizados aqui -->
-            </tbody>
-        </table>
+        <section>
+            <h2>Tabela de Relatórios</h2>
+            <table class="tabela-dados" id="tabela-relatorios">
+                <thead>
+                    <tr>
+                        <th>ID Relatório</th>
+                        <th>Tipo Relatório</th> 
+                        <th>Problema</th>
+                        <th>Conteúdo</th>
+                        <th>Data Geração</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dados serão renderizados aqui -->
+                </tbody>
+            </table>
+        </section>
         
         <div class="mensagem" id="mensagem"></div>
     
     </main>
-    
+
+    <!-- Script para renderizar dados nas tabelas -->
+    <script>
+        // Exemplo de dados que podem ser preenchidos nas tabelas
+        const pecasData = [
+            { id: 1, nome: "Peça A", descricao: "Descrição A", dataRecebimento: "2023-05-01" },
+            { id: 2, nome: "Peça B", descricao: "Descrição B", dataRecebimento: "2023-05-02" }
+        ];
+
+        const ordensData = [
+            { id: 101, descricao: "Ordem 1", dataInicio: "2023-05-01", status: "Concluída" },
+            { id: 102, descricao: "Ordem 2", dataInicio: "2023-05-03", status: "Em andamento" }
+        ];
+
+        const inspecaoData = [
+            { id: 201, idOrdem: 101, problema: "Problema A", recomendacao: "Recomendação A", dataInspecao: "2023-05-01" },
+            { id: 202, idOrdem: 102, problema: "Problema B", recomendacao: "Recomendação B", dataInspecao: "2023-05-02" }
+        ];
+
+        const relatoriosData = [
+            { id: 301, tipo: "Relatório A", problema: "Problema A", conteudo: "Conteúdo A", dataGeracao: "2023-05-01" },
+            { id: 302, tipo: "Relatório B", problema: "Problema B", conteudo: "Conteúdo B", dataGeracao: "2023-05-02" }
+        ];
+
+        // Função para renderizar dados nas tabelas
+        function renderTableData(tableId, data) {
+            const tableBody = document.querySelector(`#${tableId} tbody`);
+            tableBody.innerHTML = ''; // Limpar conteúdo atual
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                Object.values(item).forEach(value => {
+                    const cell = document.createElement('td');
+                    cell.textContent = value;
+                    row.appendChild(cell);
+                });
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Renderizar dados nas tabelas
+        renderTableData("tabela-pecas", pecasData);
+        renderTableData("tabela-ordens", ordensData);
+        renderTableData("tabela-inspecao", inspecaoData);
+        renderTableData("tabela-relatorios", relatoriosData);
+    </script>
+
 </body>
 </html>
