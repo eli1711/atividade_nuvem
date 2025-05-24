@@ -1,26 +1,67 @@
 version: '3'
+
 services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      
+      MYSQL_DATABASE: projeto
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d  # Diretório onde o init.sql pode estar
+    networks:
+      - projeto_net
+
   servico_producao:
     build: ./servico_producao
     ports:
       - "5000:5000"
+    depends_on:
+      - mysql
+    networks:
+      - projeto_net
 
   servico_qualidade:
     build: ./servico_qualidade
     ports:
       - "5001:5001"
+    depends_on:
+      - mysql
+    networks:
+      - projeto_net
 
   servico_pecas:
     build: ./servico_pecas
     ports:
       - "5002:5002"
+    depends_on:
+      - mysql
+    networks:
+      - projeto_net
 
   servico_relatorios:
     build: ./servico_relatorios
     ports:
       - "5003:5003"
+    depends_on:
+      - mysql
+    networks:
+      - projeto_net
 
   servico_certificacao:
     build: ./servico_certificacao
     ports:
       - "5004:5004"
+    depends_on:
+      - mysql
+    networks:
+      - projeto_net
+
+networks:
+  projeto_net:
+    driver: bridge
